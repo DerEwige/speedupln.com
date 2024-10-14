@@ -14,9 +14,10 @@ The concept of fee potential bears a resemblance to *potential energy* in physic
 Thus, a node's fee potential can be conceptualized as the product of the satoshis it holds and the ppm fee it charges, akin to potential energy being the product of mass, height, and gravitational force.
 
 ### Equation for Fee Potential:
-The fee potential of a node can be simplified as:
+The fee potential of a node can be simplified as: 
 
-Fee Potential = Satoshis × (ppm / 1,000,000)
+![image](https://github.com/user-attachments/assets/02c3bdb1-19fd-41d0-973b-9c9957d3218e)
+
 
 This equation highlights that the more satoshis a node holds and the higher the ppm fee, the greater the potential earning from routing payments.
 
@@ -35,7 +36,8 @@ The key to optimizing earnings lies in setting the *optimal* fee, which strikes 
 ### Equation for Relative Fee Potential:
 The relative fee potential between two nodes can be thought of as:
 
-Relative Fee Potential = Satoshis × (Optimal ppm / 1,000,000)
+![image](https://github.com/user-attachments/assets/79b64473-9d3f-4b00-8a0f-7dc8dff8d4fa)
+
 
 Here, the *Optimal ppm* is not simply the highest possible fee, but the fee that ensures a healthy balance of routing traffic while maintaining profitability. This is where the concept of competition and network dynamics comes into play: nodes must find the sweet spot where they remain competitive while maximizing earnings.
 
@@ -65,17 +67,18 @@ Assume a channel has 1 million satoshis but is in a low relative fee potential s
 
 - **Current Potential Earnings (Low-Potential Channel):**
 
-1,000,000 × (100 / 1,000,000) = 100 satoshis
+![image](https://github.com/user-attachments/assets/3b2d472c-276e-4ad9-9798-ba3c2d72f795)
+
   
 - **Potential Earnings (High-Potential Channel):**
 
-1,000,000 × (500 / 1,000,000) = 500 satoshis
+![image](https://github.com/user-attachments/assets/f27afc64-403d-48f2-9040-c143e511d35d)
 
 If the cost of rebalancing (moving liquidity between the two channels) is 200 satoshis, then:
 
 - **Net Gain from Rebalancing:**
 
-500 (new earnings) - 200 (rebalancing cost) = 300 satoshis net profit
+![image](https://github.com/user-attachments/assets/824435b1-9ebe-462a-8835-f2bea5da6c96)
 
 In this case, rebalancing allows you to move liquidity to a more profitable position, netting a higher earning potential while covering the cost of rebalancing.
 
