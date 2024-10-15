@@ -11,12 +11,19 @@ The concept of fee potential bears a resemblance to *potential energy* in physic
   
 - **PPM as "Height":** The fee rate (ppm) is analogous to the height in potential energy. A higher fee rate per channel increases the node’s potential earnings, just as increasing an object’s height raises its potential energy.
 
-Thus, a node's fee potential can be conceptualized as the product of the satoshis it holds and the ppm fee it charges, akin to potential energy being the product of mass, height, and gravitational force.
+Thus, a node's fee potential can be conceptualized as the sum of the fee potentials across its channels. Each channel contributes to the node's overall fee potential based on the product of the satoshis in that channel and the ppm fee it charges. This is akin to potential energy being the sum of the contributions of individual masses at different heights within a system.
+
 
 ### Equation for Fee Potential:
 The fee potential of a node can be simplified as: 
 
-![image](https://github.com/user-attachments/assets/02c3bdb1-19fd-41d0-973b-9c9957d3218e)
+![image](https://github.com/user-attachments/assets/6da91508-6a71-416d-b0ee-96f157f1f827)
+
+
+Where:
+- `n` is the number of channels.
+- `Satoshisᵢ` is the amount of satoshis in channel `i`.
+- `ppmᵢ` is the fee (in ppm) charged in channel `i`.
 
 
 This equation highlights that the more satoshis a node holds and the higher the ppm fee, the greater the potential earning from routing payments.
@@ -46,6 +53,8 @@ In essence, while the initial idea of fee potential suggests that more satoshis 
 ## 3. Earning Through Rebalancing: Moving Satoshis to Maximize Relative Fee Potential
 
 Rebalancing in the Lightning Network is a strategy where nodes move their satoshis between different channels to optimize their earning potential. The idea is to shift liquidity from channels with low relative fee potential (where earnings are suboptimal) to channels with higher relative fee potential, where the satoshis can generate more income. By doing this effectively, node operators can increase their overall earnings, provided that the cost of rebalancing is lower than the potential earnings gained from repositioning the liquidity.
+
+**Note:** While profit maximization is a key reason for rebalancing, there are other valid motivations. One example is to ensure *reachability*—making sure that a node has sufficient liquidity in channels to remain connected and route payments effectively across the network. Without proper rebalancing, a node may become poorly positioned in the network, limiting its ability to route payments, even if it isn't directly focused on earning higher fees.
 
 ### How Rebalancing Works
 
@@ -87,5 +96,7 @@ In this case, rebalancing allows you to move liquidity to a more profitable posi
 - **Optimizing Liquidity Distribution:** Rebalancing helps distribute your satoshis across channels more effectively, ensuring that liquidity is where it is most needed and most profitable.
 - **Arbitrage of Fee Potential:** By moving liquidity from low relative fee potential channels to higher ones, you are essentially performing arbitrage, capitalizing on the difference in earning potential across different parts of the network.
 - **Cost-Efficiency:** The key to profitable rebalancing lies in the cost. If you can rebalance for less than the relative fee potential gain, you’re turning a profit.
+
+**Note:** It's important to remember that fee potential is volatile. The optimal fee rates (ppm) and demand for routing can change due to network conditions, competition, or liquidity shifts. This means there’s always a risk that after rebalancing, you might end up "selling" or routing the satoshis for less than the cost of rebalancing, resulting in a loss instead of a profit. Effective rebalancing requires careful monitoring of these changing factors.
 
 In summary, rebalancing is about strategically shifting liquidity to channels with higher relative fee potential, allowing you to maximize your earnings. It’s not just about having more satoshis in a channel—it’s about ensuring that those satoshis are in the right place, where they can earn the most, while minimizing the costs of moving them.
