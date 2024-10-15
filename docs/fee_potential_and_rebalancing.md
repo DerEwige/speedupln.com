@@ -100,3 +100,7 @@ In this case, rebalancing allows you to move liquidity to a more profitable posi
 **Note:** It's important to remember that fee potential is volatile. The optimal fee rates (ppm) and demand for routing can change due to network conditions, competition, or liquidity shifts. This means there’s always a risk that after rebalancing, you might end up "selling" or routing the satoshis for less than the cost of rebalancing, resulting in a loss instead of a profit. Effective rebalancing requires careful monitoring of these changing factors.
 
 In summary, rebalancing is about strategically shifting liquidity to channels with higher relative fee potential, allowing you to maximize your earnings. It’s not just about having more satoshis in a channel—it’s about ensuring that those satoshis are in the right place, where they can earn the most, while minimizing the costs of moving them.
+
+---
+
+*Special thanks to* [**feelancer21**](https://github.com/feelancer21) *for providing valuable feedback and helping to improve this article.*
