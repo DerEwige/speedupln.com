@@ -2,7 +2,7 @@
 
 ## 1. Fee Potential in the Lightning Network: A Comparison to Potential Energy
 
-In the Lightning Network, nodes enable off-chain transactions by forwarding payments across various channels, charging fees for the service. A key element of this fee system is the "parts per million" (ppm) metric, which represents the fee charged per million satoshis transacted. Ignoring the base fee, the earning potential of a node in the Lightning Network can be viewed as a function of the fee rate (ppm) and the amount of satoshis it holds in its channels. This earning potential can be thought of as *fee potential*.
+In the Lightning Network, nodes enable off-chain transactions by forwarding payments across various channels, charging fees for the service. A key element of this fee system is the "parts per million" (ppm) metric, which represents the fee charged per million satoshis payments. Ignoring the base fee, the earning potential of a node in the Lightning Network can be viewed as a function of the fee rate (ppm) and the amount of satoshis it holds in its channels. This earning potential can be thought of as *fee potential*.
 
 The concept of fee potential bears a resemblance to *potential energy* in physics, where the energy stored in an object is based on its position relative to other forces, such as gravity. Just as an object at a higher altitude has greater potential energy due to its position in a gravitational field, the satoshis locked in a channel on the Lightning Network have greater fee potential when the ppm is higher. 
 
@@ -30,15 +30,17 @@ This equation highlights that the more satoshis a node holds and the higher the 
 
 ## 2. Relative Fee Potential: The Balance Between Fees and Routing
 
-While setting a higher parts per million (ppm) fee rate increases the potential earnings in theory, in practice, the fee cannot be arbitrarily high. If a node sets its fee too high, it becomes unattractive for routing payments, as other channels with lower fees will be preferred. As a result, even though the *fee potential* would seem higher due to the increased fee rate, the actual earnings may drop because no transactions will flow through that channel. 
+While setting a higher parts per million (ppm) fee rate increases the potential earnings in theory, in practice, the fee cannot be arbitrarily high. If a node sets its fee too high, it becomes unattractive for routing payments, as other channels with lower fees will be preferred. As a result, even though the *fee potential* would seem higher due to the increased fee rate, the actual earnings may drop because no payment will flow through that channel. 
 
 This introduces the concept of *relative fee potential*. Unlike pure fee potential, which only considers the fee rate and the amount of satoshis in a channel, relative fee potential takes into account the balance between having a fee that is neither too high nor too low. 
 
-- **Too High a Fee (Overpriced):** If the fee rate is too high, nodes will avoid using that channel, leading to no routed transactions and zero earnings. In this case, the theoretical fee potential becomes irrelevant since no actual earnings are realized.
+- **Too High a Fee (Overpriced):** If the fee rate is too high, nodes will avoid using that channel, leading to no routed payments and zero earnings. In this case, the theoretical fee potential becomes irrelevant since no actual earnings are realized.
   
-- **Too Low a Fee (Underpriced):** Conversely, setting the fee too low might attract a lot of traffic, but the earnings from each transaction will be minimal. This may result in the channel being used frequently but without generating substantial income for the node operator.
+- **Too Low a Fee (Underpriced):** Conversely, setting the fee too low might attract a lot of traffic, but the earnings from each payment will be minimal. This may result in the channel being used frequently but without generating substantial income for the node operator.
 
-The key to optimizing earnings lies in setting the *optimal* fee, which strikes a balance between attracting sufficient routing traffic and charging enough to make each transaction profitable. The optimal fee will vary depending on the competition between nodes, the liquidity in the channel, and the network’s demand for routing through those specific nodes.
+The key to optimizing earnings lies in setting the *optimal* fee, which strikes a balance between attracting sufficient routing traffic and charging enough to make each payment profitable. The optimal fee will vary depending on the competition between nodes, the liquidity in the channel, and the network’s demand for routing through those specific nodes.
+
+> **Note:** It is really challenging to find the optimal ppm with a peer, as many factors are at play. Personally, I use an algorithm that gradually lowers or raises my fees with direct peers to find the pressure point where optimal flow occurs—balancing between rebalancing capability and profitability. Once my algorithm identifies these points, I have the optimal ppm or relative fee potential with my direct peers. I can then use these peers as anchor points and leverage publicly available fee information to estimate the fee potential with other peers to a certain degree.
 
 ### Equation for Relative Fee Potential:
 The relative fee potential between two nodes can be thought of as:
@@ -54,17 +56,19 @@ In essence, while the initial idea of fee potential suggests that more satoshis 
 
 Rebalancing in the Lightning Network is a strategy where nodes move their satoshis between different channels to optimize their earning potential. The idea is to shift liquidity from channels with low relative fee potential (where earnings are suboptimal) to channels with higher relative fee potential, where the satoshis can generate more income. By doing this effectively, node operators can increase their overall earnings, provided that the cost of rebalancing is lower than the potential earnings gained from repositioning the liquidity.
 
-**Note:** While profit maximization is a key reason for rebalancing, there are other valid motivations. One example is to ensure *reachability*—making sure that a node has sufficient liquidity in channels to remain connected and route payments effectively across the network. Without proper rebalancing, a node may become poorly positioned in the network, limiting its ability to route payments, even if it isn't directly focused on earning higher fees.
+> **Disclaimer:** While this section focuses on optimizing earning potential through rebalancing, I won’t dive into my belief that traffic on most channels will tend to be unidirectional. This topic is complex and best handled in a separate article.
+
+> **Note:** While profit maximization is a key reason for rebalancing, there are other valid motivations. One example is to ensure *reachability*—making sure that a node has sufficient liquidity in channels to remain connected and route payments effectively across the network. Without proper rebalancing, a node may become poorly positioned in the network, limiting its ability to route payments, even if it isn't directly focused on earning higher fees.
 
 ### How Rebalancing Works
 
-Each channel on a node has a different relative fee potential, determined by the balance of the satoshis in the channel and the optimal fee rate (ppm). If a channel is under-utilized (i.e., it charges a fee that is too low or has insufficient liquidity), the satoshis in that channel are not maximizing their earning potential. Meanwhile, a channel with a higher relative fee potential (more optimal fee and traffic) may need more liquidity to route larger payments or handle more transactions.
+Each channel on a node has a different relative fee potential, determined by the balance of the satoshis in the channel and the optimal fee rate (ppm). If a channel is under-utilized (i.e., it charges a fee that is too low or has insufficient liquidity), the satoshis in that channel are not maximizing their earning potential. Meanwhile, a channel with a higher relative fee potential (higher optimal fee and traffic) may need more liquidity to route larger payments or handle more payments.
 
 The key to earning money through rebalancing lies in moving satoshis from the low-performing channels to higher-performing channels. Here’s how it works:
 
 1. **Identify Low-Performing Channels:** These are channels where the relative fee potential is low, meaning the channel either charges too little or has too much liquidity relative to the demand for routing through it. In this scenario, the satoshis in these channels aren’t generating significant earnings.
 
-2. **Identify High-Performing Channels:** These are channels where the relative fee potential is higher. They have an optimal fee rate and see more demand for routing. However, they may be constrained by insufficient liquidity to route larger transactions.
+2. **Identify High-Performing Channels:** These are channels where the relative fee potential is higher. They have an optimal fee rate and see more demand for routing. However, they may be constrained by insufficient liquidity to route larger payments.
 
 3. **Move Satoshis (Rebalancing):** By transferring liquidity from low-performing to high-performing channels, you are effectively reallocating satoshis to places where they can generate more income. Rebalancing typically incurs a cost in the form of fees paid to other nodes along the rebalancing route.
 
@@ -97,7 +101,7 @@ In this case, rebalancing allows you to move liquidity to a more profitable posi
 - **Arbitrage of Fee Potential:** By moving liquidity from low relative fee potential channels to higher ones, you are essentially performing arbitrage, capitalizing on the difference in earning potential across different parts of the network.
 - **Cost-Efficiency:** The key to profitable rebalancing lies in the cost. If you can rebalance for less than the relative fee potential gain, you’re turning a profit.
 
-**Note:** It's important to remember that fee potential is volatile. The optimal fee rates (ppm) and demand for routing can change due to network conditions, competition, or liquidity shifts. This means there’s always a risk that after rebalancing, you might end up "selling" or routing the satoshis for less than the cost of rebalancing, resulting in a loss instead of a profit. Effective rebalancing requires careful monitoring of these changing factors.
+> **Note:** It's important to remember that fee potential is volatile. The optimal fee rates (ppm) and demand for routing can change due to network conditions, competition, or liquidity shifts. This means there’s always a risk that after rebalancing, you might end up "selling" or routing the satoshis for less than the cost of rebalancing, resulting in a loss instead of a profit. Effective rebalancing requires careful monitoring of these changing factors.
 
 In summary, rebalancing is about strategically shifting liquidity to channels with higher relative fee potential, allowing you to maximize your earnings. It’s not just about having more satoshis in a channel—it’s about ensuring that those satoshis are in the right place, where they can earn the most, while minimizing the costs of moving them.
 
